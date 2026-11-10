@@ -1,10 +1,26 @@
-from flask import Flask
+from flask import Flask, jsonify
+from pymongo import MongoClient
+import os
 
 app = Flask(__name__)
 
-@app.route("/")
-def hello_world():
-    return "Hello, World!"
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://mongo:27017/")
+client = MongoClient(MONGO_URI)
+db = client["flaskdb"]
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+@app.route("/")
+def index():
+    try:
+        client.admin.command('ping')
+        return jsonify({
+            "status": "success",
+            "message": "Connexion à MongoDB"
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": f"Échec de connexion à MongoDB : {str(e)}"
+        }), 500
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)

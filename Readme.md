@@ -17,3 +17,9 @@ Conteneurs actifs : docker ps
 Accès navigateur : http://localhost:8080
 Arrêter le conteneur : docker stop mon_nginx
 Supprimer le conteneur : docker rm mon_nginx
+
+- TP1/exercice3 : Déploiement d'une application Python Flask
+Création et conteneurisation d'une application web Python Flask minimale avec un Dockerfile.
+
+- TP1/exercice4 : Utilisation de docker compose
+Connexion de l'application Flask à une base de données MongoDB et gestion des dépendances via requirements.txt.
